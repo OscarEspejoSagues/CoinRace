@@ -18,5 +18,25 @@
     <ClCompile Include="Map.cc">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CoinManager.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cc">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Map.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CoinManager.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
