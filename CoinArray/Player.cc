@@ -16,8 +16,21 @@ void Player::playerinicial(int posX, int posY) {
 	y = (rand() % posY);
 }
 
-void Player::playeractualiza(Key K) {
-	
+void Player::playeractualiza(int posX, int posY, bool &teclus) {
+	switch (Input::getKey ()) {
+	case Input::Key::W:
+		x--;
+		break;
+	case Input::Key::A:
+		y--;
+		break;
+	case Input::Key::S:
+		x++;
+		break;
+	case Input::Key::D:
+		y++;
+		break;
+	}
 }
 
 

@@ -29,9 +29,6 @@ int menu() {
 }
 
 
-
-
-
 void main() {
 	srand(time(nullptr));
 
@@ -45,5 +42,11 @@ void main() {
 	jugador.playerinicial(row, col);
 	mapita.changeSymbol(jugador.x, jugador.y, '@');
 	mapita.printField(row, col);
+
+	bool tecla = false;
+	while (tecla){
+		jugador.playeractualiza(row, col, tecla);
+	}
+
 
 }
