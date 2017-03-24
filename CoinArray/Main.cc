@@ -4,7 +4,8 @@
 #include <conio.h>
 #include "Map.hh"
 #include "Player.hh"
-#include "CoinManager.hh"
+
+
 
 using namespace std;
 
@@ -24,7 +25,20 @@ int menu() {
 
 }
 
+
+
+
+
 void main() {
-	menu();
+	int diff = menu();
+	int row;
+	int col;
+	int puntuacion = 0;
+	Map mapita = Map(diff, row, col);
+	Player jugador = Player(row, col, puntuacion);
+	mapita.mapGenerator(row, col);
+	jugador.playerinicial(row, col);
+	mapita.changeSymbol(jugador.x, jugador.y, '@');
+	mapita.printField(row, col);
 
 }

@@ -4,23 +4,20 @@
 #include <conio.h>
 #include "Player.hh"
 
-Player::Player(int posX, int posY) {
+Player::Player(int &posX, int &posY, int &puntos) {
 	x = posX;
 	y = posY;
-}
-
-int Player::getX() {
-	return x;
-}
-
-int Player::getY() {
-	return y;
-}
-
-void Player::SetPuntuacion(int puntos) {
 	puntuacion = puntos;
 }
 
-int Player::retpuntuacio() {
-	return puntuacion;
+void Player::playerinicial(int posX, int posY) {
+	x = (rand() % posX);
+	y = (rand() % posY);
 }
+
+
+
+
+
+
+

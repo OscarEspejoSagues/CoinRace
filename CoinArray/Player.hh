@@ -30,16 +30,16 @@ enum class Key
 class Player
 {
 public:
-	Player(int x, int y);
-	int getX();
-	int getY();
-	void SetPuntuacion(int puntuacion);
-	int retpuntuacio();
+	Player(int &x, int &y, int &puntuacion);
+	void playerinicial(int x, int y);
+	
+	int x;
+	int y;
+	char pj = '@';
+	int puntuacion;
 
 
 private:
-	int x;
-	int y;
-	int puntuacion;
+	
 };
 

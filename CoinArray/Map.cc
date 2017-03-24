@@ -4,29 +4,26 @@
 #include <conio.h>
 #include "Map.hh"
 
-using namespace std;
 
-Map::Map(int &diff) {
-	row = ((rand() % (10 * diff - 5 * diff)) + 5 * diff);
-	col = ((rand() % (10 * diff - 5 * diff)) + 5 * diff);
-	mapGenerator();
-	printField();
+Map::Map(int &diff, int &filas, int &columnas) {
+	filas = ((rand() % (10 * diff - 5 * diff)) + 5 * diff);
+	columnas = ((rand() % (10 * diff - 5 * diff)) + 5 * diff);
 }
 
-void Map::mapGenerator() {
-		md = new char*[row];
-		for (int i = 0; i < row; i++) {
-			md[i] = new char[col];
-			for (int j = 0; j < col; j++) {
+void Map::mapGenerator(int &filas, int &columnas) {
+		md = new char*[filas];
+		for (int i = 0; i < filas; i++) {
+			md[i] = new char[columnas];
+			for (int j = 0; j < columnas; j++) {
 				md[i][j] = '.';
 			}
 		}
 	}
 
-void Map::printField() {
+void Map::printField(int &filas, int &columnas) {
 		char print;
-		for (int i = 0; i < row; i++) {
-			for (int j = 0; j < col; j++) {
+		for (int i = 0; i < filas; i++) {
+			for (int j = 0; j < columnas; j++) {
 				print = md[i][j];
 				std::cout << print;
 			}
