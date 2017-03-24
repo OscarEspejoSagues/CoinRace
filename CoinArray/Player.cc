@@ -11,8 +11,13 @@ Player::Player(int &posX, int &posY, int &puntos) {
 }
 
 void Player::playerinicial(int posX, int posY) {
+
 	x = (rand() % posX);
 	y = (rand() % posY);
+}
+
+void Player::playeractualiza(Key K) {
+	
 }
 
 
