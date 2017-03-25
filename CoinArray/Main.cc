@@ -18,16 +18,16 @@ int menu() {
 	int diff;
 
 	system("color 8B");
-	std::cout << "//////////////////////////////" << std::endl;
-	std::cout << "          COIN RACE           " << std::endl;
-	std::cout << "//////////////////////////////" << std::endl;
+	std::cout << "     //////////////////////////////     " << std::endl;
+	std::cout << "               COIN RACE           " << std::endl;
+	std::cout << "     //////////////////////////////     " << std::endl;
 	std::cout << endl;
 
 	std::cout << "Selecciona una de las 3 dificultades" << std::endl;
 	std::cout << endl;
-	std::cout << "Easy == 1" << std::endl;
-	std::cout << "Normal == 2" << std::endl;
-	std::cout << "Hard == 3" << std::endl;
+	std::cout << "     Easy == 1     " << std::endl;
+	std::cout << "     Normal == 2   " << std::endl;
+	std::cout << "     Hard == 3     " << std::endl;
 	std::cout << endl;
 
 	std::cin >> diff;
