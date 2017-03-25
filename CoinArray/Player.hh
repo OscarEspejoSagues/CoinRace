@@ -33,13 +33,13 @@ namespace Input {
 }
 
 
-
+//Creacion de la clase Player
 class Player
 {
 public:
 	Player(int &x, int &y, int &puntuacion);
 	void playerinicial(int x, int y);
-	void playeractualiza(int x, int y, bool &tecla);
+	void movimientoplayer();
 
 
 	int x;

@@ -7,7 +7,6 @@
 CoinManager::CoinManager(int &rows, int &colus) {
 	filasMapa = rows;
 	columnasMapa = colus;
-	
 }
 
 int CoinManager::coininmap(apuntCoins **total) const {
@@ -43,6 +42,5 @@ void CoinManager::coinGenerator(int rows, int columns) {
 
 void CoinManager::removeCoin(int &posX, int &posY) {
 	int help = -1;
-
 }
 

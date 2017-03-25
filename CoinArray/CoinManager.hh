@@ -1,5 +1,7 @@
 
-class Map;
+
+//Creacion de la clase CoinManager
+
 
 typedef struct coin {
 	int posX;
