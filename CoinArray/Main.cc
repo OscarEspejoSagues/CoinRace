@@ -4,6 +4,8 @@
 #include <conio.h>
 #include "Map.hh"
 #include "Player.hh"
+#include "CoinManager.hh"
+#include<Windows.h>
 
 
 
@@ -28,6 +30,20 @@ int menu() {
 
 }
 
+void updateMap(int &row, int &col, HANDLE hConsole, Map map, const Player &p, const CoinManager & coin_manager, int coin_target) {
+	system("cls");
+	apuntCoins *coin_data;
+	int cantidaddemonedas;
+	// Get the current coin data and set the coins inside the map1
+	cantidaddemonedas = coin_manager.coininmap(&coin_data);
+	for (int i = 0; i < cantidaddemonedas; ++i) {
+		map.changeSymbol(coin_data[i].posX, coin_data[i].posY, '$');
+	}
+	map.printField(row, col);
+	map.changeSymbol(p.x, p.y, p.pj);
+	std::cout << std::endl << "Score: ";
+	std::cout << p.puntuacion;
+}
 
 void main() {
 	srand(time(nullptr));
@@ -38,15 +54,17 @@ void main() {
 	int puntuacion = 0;
 	Map mapita = Map(diff, row, col);
 	Player jugador = Player(row, col, puntuacion);
+	CoinManager coins = CoinManager(row, col);
+	int totalCoins = coins.monedas(row, col);
 	mapita.mapGenerator(row, col);
 	jugador.playerinicial(row, col);
-	mapita.changeSymbol(jugador.x, jugador.y, '@');
-	mapita.printField(row, col);
+	coins.coinGenerator(row, col);
+	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+	updateMap(row,col,hConsole, mapita, jugador, coins, totalCoins);
+	//mapita.changeSymbol(jugador.x, jugador.y, '@');
 
 	bool tecla = false;
 	while (tecla){
 		jugador.playeractualiza(row, col, tecla);
 	}
-
-
 }

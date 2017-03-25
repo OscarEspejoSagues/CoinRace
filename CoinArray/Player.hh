@@ -5,7 +5,9 @@ namespace Input {
 	enum class Key
 	{
 		NONE, W, A, S, D, ENTER, ESC
-	};	static Key getKey()
+	};
+
+	static Key getKey()
 	{
 		if (_kbhit())
 		{
@@ -29,7 +31,8 @@ namespace Input {
 	}
 
 }
-
+
+
 
 class Player
 {
