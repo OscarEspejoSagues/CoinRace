@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <ctime>
+#include <stdio.h>
 #include <conio.h>
 #include "Map.hh"
 
