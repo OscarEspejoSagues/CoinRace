@@ -78,7 +78,7 @@ int main() {
 	Player jugador = Player(row, col, puntuacion);		  //Hacemos la instancia del player
 	CoinManager coins = CoinManager(row, col);		      //Hacemos la instancia del coinmanager
 
-	int totalCoins = coins.monedas(row, col,diff);
+	int totalCoins = (rand() % (diff * 30 + 1)) + diff * 30;
 	mapa.mapGenerator(row, col);
 	jugador.playerinicial(row, col);
 	coins.coinGenerator(row, col,diff);

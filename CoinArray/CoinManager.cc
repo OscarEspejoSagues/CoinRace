@@ -15,7 +15,9 @@ int CoinManager::coininmap(const apuntCoins **total) const {      //Ponemos toda
 }
 
 int CoinManager::monedas(int rows,int columns,int diff) {			//Generamos el numero de monedas
-	return (rand() % diff * 30 + 1) + diff * 30;
+	int maximo = rows*columns*0.13;
+	int minimo = rows*columns*0.03;
+	return (rand() % (maximo-minimo)) + minimo;
 }
 
 void CoinManager::coinGenerator(int rows, int columns,int diff) {    //Reposicionamos las monedas de manera que no se repita la posicion de ninguna de ellas
