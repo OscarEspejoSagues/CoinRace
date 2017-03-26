@@ -16,8 +16,26 @@ void Player::playerinicial(int posX, int posY) {
 	y = (rand() % posY);
 }
 
-void Player::movimientoplayer() { //no se hacer el movimiento
+int Player::recojerCoin() {
+	return puntuacion;
+}
 
+void Player::movimientoplayer(Key key) {
+
+	switch (key) {
+	case Key::W:
+		x--;
+		break;
+	case Key::A:
+		y--;
+		break;
+	case Key::S:
+		x++;
+		break;
+	case Key::D:
+		y++;
+		break;
+	}
 
 }
 

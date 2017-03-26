@@ -7,7 +7,6 @@ public:
 	void printField(int &row, int &col);                             //funcion que printa el mapa
 	void mapGenerator(int &row, int &col);							 //funcion que permite generar el mapa lleno de puntos
 
-
 private:
 	char **md;
 	int row;

@@ -1,7 +1,5 @@
 #include <conio.h>
 
-namespace Input {
-
 	enum class Key
 	{
 		NONE, W, A, S, D, ENTER, ESC
@@ -30,7 +28,7 @@ namespace Input {
 		return Key::NONE;
 	}
 
-}
+
 
 
 //Creacion de la clase Player
@@ -39,7 +37,8 @@ class Player
 public:
 	Player(int &x, int &y, int &puntuacion);
 	void playerinicial(int x, int y);
-	void movimientoplayer();
+	void movimientoplayer(Key key);
+	int recojerCoin();
 
 
 	int x;

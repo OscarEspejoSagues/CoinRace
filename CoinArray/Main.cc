@@ -50,7 +50,20 @@ void updateMap(int &row, int &col, HANDLE hConsole, Map map, const Player &p, co
 	std::cout << p.puntuacion;
 }
 
-void main() {
+bool checkNextPosition(int &rows, int &columns, const Map &map, const Player &jugador, const Key &key) {
+	switch (key) {
+	case Key::A:
+		return jugador.y > 0;
+	case Key::W:
+		return jugador.x > 0;
+	case Key::S:
+		return jugador.x <  rows - 1;
+	case Key::D:
+		return jugador.y < columns - 1;
+	}
+}
+
+int main() {
 	srand(time(nullptr));
 
 	int diff = menu();
@@ -68,14 +81,29 @@ void main() {
 	coins.coinGenerator(row, col);
 
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-
 	mapa.changeSymbol(jugador.x, jugador.y, '@');
 	updateMap(row, col, hConsole, mapa, jugador, coins, totalCoins);
-
+	
 
 	bool tecla = true;
 
-	while (tecla) {
-		jugador.movimientoplayer();
+	while (jugador.puntuacion < totalCoins) {
+		
+		Key key = getKey();
+		if (key == Key::ESC) {
+			return 0;
+		}
+		else if (key == Key::NONE) {
+			continue;
+		}
+		else {
+			mapa.changeSymbol(jugador.x, jugador.y, '.');
+			if (checkNextPosition(row,col,mapa, jugador, key)) {
+				jugador.movimientoplayer(key);
+			}
+		}
+		mapa.changeSymbol(jugador.x, jugador.y, '@');
+		updateMap(row,col,hConsole, mapa, jugador, coins, totalCoins);
+		
 	}
 }
