@@ -37,14 +37,15 @@ int menu() {  //Funcion que permite generar un menu para el juego, con el select
 
 }
 
-void updateMap(int &row, int &col, HANDLE hConsole, Map map, const Player &p, const CoinManager & coin_manager, int coin_target) {  //Funcion que permite la uptadate del mapa
+void updateMap(int &row, int &col,int totalCoins, HANDLE hConsole, Map map, const Player &p, const CoinManager & coin_manager, int coin_target) {  //Funcion que permite la uptadate del mapa
 	system("cls");
-	apuntCoins *coin_data;
+	const apuntCoins *coin_data;
 	int cantidaddemonedas;
 	cantidaddemonedas = coin_manager.coininmap(&coin_data);
 	for (int i = 0; i < cantidaddemonedas; ++i) {
 		map.changeSymbol(coin_data[i].posX, coin_data[i].posY, '$');
 	}
+	std::cout << "You need to pick " << totalCoins << " coins to win." << std::endl;
 	map.printField(row, col);
 	map.changeSymbol(p.x, p.y, p.pj);
 	std::cout << std::endl << "Score: ";
@@ -77,16 +78,17 @@ int main() {
 	Player jugador = Player(row, col, puntuacion);		  //Hacemos la instancia del player
 	CoinManager coins = CoinManager(row, col);		      //Hacemos la instancia del coinmanager
 
-	int totalCoins = coins.monedas(row, col);
+	int totalCoins = coins.monedas(row, col,diff);
 	mapa.mapGenerator(row, col);
 	jugador.playerinicial(row, col);
-	coins.coinGenerator(row, col);
+	coins.coinGenerator(row, col,diff);
+	const apuntCoins *coinsActuales;
 
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);   //Permite hacer el update cada vez que movemos al player
 	mapa.changeSymbol(jugador.x, jugador.y, '@');	     //Posicionamos el char del player
-	updateMap(row, col, hConsole, mapa, jugador, coins, totalCoins);  
+	updateMap(row, col, totalCoins, hConsole, mapa, jugador, coins, totalCoins);  
 	
-	while (jugador.puntuacion < totalCoins) { //Aqui tenemos el bucle de la duracion de la partida
+	while (jugador.recojerCoin() < totalCoins) { //Aqui tenemos el bucle de la duracion de la partida
 											  //Cuando el jugador recoja todas las monedas la partida acaba
 		Key key = getKey();
 		if (key == Key::ESC) {
@@ -99,13 +101,24 @@ int main() {
 			mapa.changeSymbol(jugador.x, jugador.y, '.');
 			if (checkNextPosition(row,col,mapa, jugador, key)) {
 				jugador.movimientoplayer(key);
+				
+				puntuacion = coins.coininmap(&coinsActuales);
+				for (int i = 0; i < puntuacion; ++i) {
+					if (coinsActuales[i].posX == jugador.x && coinsActuales[i].posY == jugador.y) {
+						jugador.puntuacion += 1;
+						coins.removeCoin(jugador.x, jugador.y, diff);
+						break;
+					}
+				}
+				mapa.changeSymbol(jugador.x, jugador.y, '@');
+				updateMap(row, col, totalCoins, hConsole, mapa, jugador, coins, totalCoins);
 			}
 		}
-		mapa.changeSymbol(jugador.x, jugador.y, '@');
-		updateMap(row,col,hConsole, mapa, jugador, coins, totalCoins);
+		
 		
 	}
 	if (jugador.puntuacion == totalCoins){  //Condicion de victoria para el juego 
-		std::cout << "Congratulations, you beat the game" << endl;
+		std::cout << std::endl;
+		std::cout << "Congratulations, you win the game" << endl;
 	}
 }
