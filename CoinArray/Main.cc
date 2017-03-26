@@ -36,16 +36,17 @@ int menu() {
 
 }
 
-void updateMap(int &row, int &col, HANDLE hConsole, Map map, const Player &p, const CoinManager & coin_manager, int coin_target) {
+void updateMap(int &row, int &col,int &totalCoins, HANDLE hConsole, Map map, const Player &p, const CoinManager & coin_manager, int coin_target) {
 	system("cls");
-	apuntCoins *coin_data;
+	const apuntCoins *coin_data;
 	int cantidaddemonedas;
 	cantidaddemonedas = coin_manager.coininmap(&coin_data);
 	for (int i = 0; i < cantidaddemonedas; ++i) {
 		map.changeSymbol(coin_data[i].posX, coin_data[i].posY, '$');
 	}
-	map.printField(row, col);
+	std::cout << "You need to pick " << totalCoins << " to win" << std::endl;
 	map.changeSymbol(p.x, p.y, p.pj);
+	map.printField(row, col);
 	std::cout << std::endl << "Score: ";
 	std::cout << p.puntuacion;
 }
@@ -75,20 +76,18 @@ int main() {
 	Player jugador = Player(row, col, puntuacion);
 	CoinManager coins = CoinManager(row, col);
 
-	int totalCoins = coins.monedas(row, col);
+	int totalCoins = coins.monedas(row, col,diff);
 	mapa.mapGenerator(row, col);
+	coins.coinGenerator(row, col,diff);
 	jugador.playerinicial(row, col);
-	coins.coinGenerator(row, col);
+	const apuntCoins *coinsActuales;
 
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
-	mapa.changeSymbol(jugador.x, jugador.y, '@');
-	updateMap(row, col, hConsole, mapa, jugador, coins, totalCoins);
-	
+	updateMap(row, col, totalCoins, hConsole, mapa, jugador, coins, totalCoins);
 
-	bool tecla = true;
 
-	while (jugador.puntuacion < totalCoins) {
-		
+	while (jugador.recojerCoin() < totalCoins) {
+
 		Key key = getKey();
 		if (key == Key::ESC) {
 			return 0;
@@ -98,12 +97,20 @@ int main() {
 		}
 		else {
 			mapa.changeSymbol(jugador.x, jugador.y, '.');
-			if (checkNextPosition(row,col,mapa, jugador, key)) {
+			if (checkNextPosition(row, col, mapa, jugador, key)) {
 				jugador.movimientoplayer(key);
+
+				puntuacion = coins.coininmap(&coinsActuales);
+				for (int i = 0; i < puntuacion; ++i) {
+					if (coinsActuales[i].posX == jugador.x && coinsActuales[i].posY == jugador.y) {
+						jugador.puntuacion += 1;
+						coins.removeCoin(jugador.x, jugador.y,diff);
+						break;
+					}
+				}
+				mapa.changeSymbol(jugador.x, jugador.y, '@');
+				updateMap(row, col,totalCoins, hConsole, mapa, jugador, coins, totalCoins);
 			}
 		}
-		mapa.changeSymbol(jugador.x, jugador.y, '@');
-		updateMap(row,col,hConsole, mapa, jugador, coins, totalCoins);
-		
 	}
 }

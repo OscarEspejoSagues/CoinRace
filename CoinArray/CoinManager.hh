@@ -11,10 +11,10 @@ typedef struct coin {
 class CoinManager
 {
 public:
-	void coinGenerator(int rows, int columns);
-	void removeCoin(int &posX, int &posY);
-	int coininmap(apuntCoins **total) const;
-	int monedas(int rows,int columns);
+	void coinGenerator(int rows, int columns,int diff);
+	void removeCoin(int &posX, int &posY,int diff);
+	int coininmap(const apuntCoins **total) const;
+	int monedas(int rows,int columns,int diff);
 	CoinManager(int &rows, int &cols);
 
 private:

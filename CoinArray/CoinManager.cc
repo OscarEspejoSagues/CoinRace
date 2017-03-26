@@ -9,18 +9,18 @@ CoinManager::CoinManager(int &rows, int &colus) {
 	columnasMapa = colus;
 }
 
-int CoinManager::coininmap(apuntCoins **total) const {
+int CoinManager::coininmap(const apuntCoins **total) const {
 	*total = coinData;
 	return cantidaddemonedas;
 }
 
-int CoinManager::monedas(int rows,int columns) {
-	return (rand() % (rows*columns / 10)) + rows*columns*0.03;
+int CoinManager::monedas(int rows,int columns,int diff) {
+	return (rand() % diff*30+1)+diff*30;
 }
 
-void CoinManager::coinGenerator(int rows, int columns) {
-	
-	cantidaddemonedas = monedas(rows, columns);
+void CoinManager::coinGenerator(int rows, int columns,int diff) {
+
+	cantidaddemonedas = monedas(filasMapa, columnasMapa,diff);
 	coinData = static_cast<apuntCoins*>(malloc(cantidaddemonedas * sizeof(apuntCoins)));
 	int randX, randY;
 	bool repeated;
@@ -40,7 +40,24 @@ void CoinManager::coinGenerator(int rows, int columns) {
 	}
 };
 
-void CoinManager::removeCoin(int &posX, int &posY) {
-	int help = -1;
+void CoinManager::removeCoin(int &posX, int &posY,int diff) {
+	int pos = -1;
+	for (int i = 0; i < cantidaddemonedas && pos == -1; i++) {
+		if (coinData[i].posX == posX && coinData[i].posY == posY) {
+			pos = i;
+		}
+	}
+	if (pos >= 0 && pos < cantidaddemonedas) {
+		for (int i = pos; i < cantidaddemonedas - 1; i++) {
+			coinData[i] = coinData[i + 1];
+		}
+		cantidaddemonedas--;
+		if (cantidaddemonedas > 0) {
+			coinData = static_cast<apuntCoins*>(realloc(coinData, cantidaddemonedas * sizeof(apuntCoins)));
+		}
+		else {
+			coinGenerator(filasMapa, columnasMapa,diff);
+		}
+	}
 }
 
