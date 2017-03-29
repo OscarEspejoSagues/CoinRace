@@ -79,9 +79,11 @@ int main() {
 	CoinManager coins = CoinManager(row, col);		      //Hacemos la instancia del coinmanager
 
 	int totalCoins = (rand() % (diff * 30 + 1)) + diff * 30;
+
 	mapa.mapGenerator(row, col);
 	jugador.playerinicial(row, col);
 	coins.coinGenerator(row, col,diff);
+
 	const apuntCoins *coinsActuales;
 
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);   //Permite hacer el update cada vez que movemos al player
