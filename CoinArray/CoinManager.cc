@@ -23,8 +23,8 @@ int CoinManager::monedas(int rows,int columns,int diff) {			//Generamos el numer
 void CoinManager::coinGenerator(int rows, int columns,int diff) {    //Reposicionamos las monedas de manera que no se repita la posicion de ninguna de ellas
 	
 	cantidaddemonedas = monedas(filasMapa, columnasMapa,diff);
-	coinData = static_cast<apuntCoins*>(malloc(cantidaddemonedas * sizeof(apuntCoins)));  //Usando malloc, podemos reservar un espacio de memoria sin necessidad de
-	int randX, randY;                                                                    //poner un valor en el
+	coinData = new coin[cantidaddemonedas]; 
+	int randX, randY;                                                                    
 	bool repeated;
 	for (int i = 0; i < cantidaddemonedas; i++) {
 		do {
@@ -54,10 +54,8 @@ void CoinManager::removeCoin(int &posX, int &posY,int diff) {  //Metodo para eli
 			coinData[i] = coinData[i + 1];
 		}
 		cantidaddemonedas--;
-		if (cantidaddemonedas > 0) {
-			coinData = static_cast<apuntCoins*>(realloc(coinData, cantidaddemonedas * sizeof(apuntCoins)));
-		}
-		else {
+		if (cantidaddemonedas <= 0) {
+			delete[] coinData;
 			coinGenerator(filasMapa, columnasMapa, diff);
 		}
 	}

@@ -15,14 +15,14 @@ using namespace std;
 
 int menu() {  //Funcion que permite generar un menu para el juego, con el selector de dificultad 
 
-	int diff;
+	int diff = 0;
 
 	system("color 9B");
 	std::cout << "     //////////////////////////////     " << std::endl;
 	std::cout << "               COIN RACE           " << std::endl;
 	std::cout << "     //////////////////////////////     " << std::endl;
 	std::cout << endl;
-
+	
 	std::cout << "Selecciona una de las 3 dificultades" << std::endl;
 	std::cout << endl;
 	
@@ -30,11 +30,12 @@ int menu() {  //Funcion que permite generar un menu para el juego, con el select
 	std::cout << "     Normal == 2   " << std::endl;
 	std::cout << "     Hard == 3     " << std::endl;
 	std::cout << endl;
-
-	std::cin >> diff;
-
+	
+	do
+	{
+		std::cin >> diff;
+	} while (!(diff==1 || diff==2 || diff==3));
 	return diff;
-
 }
 
 void updateMap(int &row, int &col,int totalCoins, HANDLE hConsole, Map map, const Player &p, const CoinManager & coin_manager, int coin_target) {  //Funcion que permite la uptadate del mapa
