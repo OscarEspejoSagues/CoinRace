@@ -7,8 +7,8 @@
 
 
 Map::Map(int &diff, int &filas, int &columnas) {                           //constructor del mapa
-	filas = ((rand() % (10 * diff - 5 * diff)) + 5 * diff);
-	columnas = ((rand() % (10 * diff - 5 * diff)) + 5 * diff);
+	filas = ((rand() % (10 * diff * diff)) + 5 * diff);                    //Modificacion de la generacion random de monedas
+	columnas = ((rand() % (10 * diff * diff)) + 5 * diff);
 }
 
 void Map::mapGenerator(int &filas, int &columnas) {                       //Aqui generamos el mapa
