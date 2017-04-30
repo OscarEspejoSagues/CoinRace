@@ -72,8 +72,9 @@ int main() {
 	srand(time(nullptr));
 
 	
-	clock_t t;//funcion que genera el tiempo, pero es el tiempo de clock del ordenador
-	t = clock();
+	clock_t tiempo;//funcion que genera el tiempo, pero es el tiempo de clock del ordenador
+	tiempo = clock();
+	
 
 	int diff = menu();
 	int row;
@@ -127,6 +128,6 @@ int main() {
 	}
 	if (jugador.puntuacion == totalCoins){  //Condicion de victoria para el juego 
 		std::cout << std::endl;
-		std::cout << "Congratulations, you win the game" <<" The time was "<< t << " seconds"<< std::endl;
+		std::cout << "Congratulations, you win the game" <<" The time was "<< tiempo << " seconds"<< std::endl;
 	}
 }
