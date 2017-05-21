@@ -6,15 +6,15 @@
 #include "Map.hh"
 
 
-Map::Map(int &diff, int &filas, int &columnas) {                           //constructor del mapa
+Map::Map(int &diff, int &filas, int &columnas) {                             //constructor del mapa
 	filas = ((rand() % (10 * diff-5 * diff)) + 5 * diff);                    //Modificacion de la generacion random de monedas
 	columnas = ((rand() % (10 * diff-5 * diff)) + 5 * diff);
 }
 
 void Map::mapGenerator(int &filas, int &columnas) {                       //Aqui generamos el mapa
-	md = new char*[filas];												  //tanto las columnas como las filas y las inicializamos en '.'
+	md = new char *[filas];												  //tanto las columnas como las filas y las inicializamos en '.'
 		for (int i = 0; i < filas; i++) {
-			md[i] = new char[columnas];
+			md[i] = new char [columnas];
 			for (int j = 0; j < columnas; j++) {
 				md[i][j] = '.';
 			}

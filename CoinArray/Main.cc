@@ -9,10 +9,6 @@
 #include "CoinManager.hh"
 #include<Windows.h>
 
-
-
-using namespace std;
-
 int menu() {  //Funcion que permite generar un menu para el juego, con el selector de dificultad 
 
 	int diff = 0;
@@ -21,17 +17,15 @@ int menu() {  //Funcion que permite generar un menu para el juego, con el select
 	std::cout << "     //////////////////////////////     " << std::endl;
 	std::cout << "               COIN RACE           " << std::endl;
 	std::cout << "     //////////////////////////////     " << std::endl;
-	std::cout << endl;
+	std::cout << std::endl;
 	
 	std::cout << "Selecciona una de las 3 dificultades" << std::endl;
-	std::cout << endl;
+	std::cout << std::endl;
 	
 	std::cout << "     Easy == 1     " << std::endl;
 	std::cout << "     Normal == 2   " << std::endl;
 	std::cout << "     Hard == 3     " << std::endl;
-	std::cout << endl;
-
-	
+	std::cout << std::endl;
 	do
 	{
 		std::cin >> diff;
@@ -89,7 +83,7 @@ int main() {
 
 	mapa.mapGenerator(row, col);
 	jugador.playerinicial(row, col);
-	coins.coinGenerator(row, col,diff);
+	coins.coinGenerator(row, col, diff);
 
 	const apuntCoins *coinsActuales;
 
