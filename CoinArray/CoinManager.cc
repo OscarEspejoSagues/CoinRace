@@ -4,9 +4,17 @@
 #include <conio.h>
 #include "CoinManager.hh"
 
+int CoinManager::filasMapa(int filasMapa) {
+	return filasMapa;
+}
+
+int CoinManager::columnasMapa(int columnasMapa) {
+	return columnasMapa;
+}
+
 CoinManager::CoinManager(int &rows, int &colus) {            //Constructor de la clase coinManager
-	filasMapa = rows;
-	columnasMapa = colus;
+	filasMapa(rows);
+	columnasMapa(colus);
 }
 
 int CoinManager::coininmap(const apuntCoins **total) const {      //Ponemos todas las monedas en el mapa
@@ -22,7 +30,7 @@ int CoinManager::monedas(int rows,int columns,int diff) {			//Generamos el numer
 
 void CoinManager::coinGenerator(int rows, int columns,int diff) {    //Reposicionamos las monedas de manera que no se repita la posicion de ninguna de ellas
 	
-	cantidaddemonedas = monedas(filasMapa, columnasMapa,diff);
+	cantidaddemonedas = monedas(filasMapa(rows), columnasMapa(columns),diff);
 	coinData = new coin[cantidaddemonedas]; 
 	int randX, randY;                                                                    
 	bool repeated;
@@ -42,7 +50,7 @@ void CoinManager::coinGenerator(int rows, int columns,int diff) {    //Reposicio
 	}
 };
 
-void CoinManager::removeCoin(int &posX, int &posY,int diff) {  //Metodo para eliminar las monedas una vez acabado
+void CoinManager::removeCoin(int &posX, int &posY,int diff,int rows,int cols) {  //Metodo para eliminar las monedas una vez acabado
 	int pos = -1;
 	for (int i = 0; i < cantidaddemonedas && pos == -1; i++) {
 		if (coinData[i].posX == posX && coinData[i].posY == posY) {
@@ -56,7 +64,7 @@ void CoinManager::removeCoin(int &posX, int &posY,int diff) {  //Metodo para eli
 		cantidaddemonedas--;
 		if (cantidaddemonedas <= 0) {
 			delete[] coinData;
-			coinGenerator(filasMapa, columnasMapa, diff);
+			coinGenerator(filasMapa(rows), columnasMapa(cols), diff);
 		}
 	}
 }

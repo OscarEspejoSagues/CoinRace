@@ -109,7 +109,7 @@ int main() {
 				for (int i = 0; i < puntuacion; ++i) {
 					if (coinsActuales[i].posX == jugador.x && coinsActuales[i].posY == jugador.y) {
 						jugador.puntuacion += 1;
-						coins.removeCoin(jugador.x, jugador.y, diff);
+						coins.removeCoin(jugador.x, jugador.y, diff,row,col);
 						break;
 					}
 				}
